@@ -9,8 +9,8 @@ import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import org.junit.*;
 /**
- * @author Pradeep
- * 
+ * @author Prady
+ *
  */
 public class PortFolioManager {
 	Map<String, Stock> stocks;
@@ -20,14 +20,16 @@ public class PortFolioManager {
 	String content = "";
 	Double key;
 	String value;
-	// String FileName = "C:\\Users\\Prady\\Desktop\\input\\sample.txt";
+	//String FileName = "C:\\Users\\Prady\\Desktop\\input\\sample.txt";
 	static String FileName;
-	String extcheck = FileName.substring(FileName.lastIndexOf(".") + 1);
-	File textFile = new File(FileName);
+
 
 	/* Method which parses the File */
 	@Test
 	public void getPortfolioDetails() throws IOException {
+		
+		File textFile = new File(FileName);
+		String extcheck = FileName.substring(FileName.lastIndexOf(".") + 1);
 		assertEquals("txt", extcheck);
 		if (textFile.isFile() && textFile.getName().endsWith(".txt")) {
 			try {
@@ -123,6 +125,8 @@ public class PortFolioManager {
 	 */
 	public boolean fetchDataOutput(String Filename) throws IOException {
 		try {
+			
+			File textFile = new File(FileName);
 			inputStream = new BufferedReader(new FileReader(textFile));
 			String line;
 			while ((line = inputStream.readLine()) != null) {
