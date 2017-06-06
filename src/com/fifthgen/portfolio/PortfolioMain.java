@@ -1,7 +1,6 @@
 package com.fifthgen.portfolio;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
+
+import java.io.IOException;
 
 /**
  * @author Prady
@@ -10,15 +9,24 @@ import org.junit.runner.notification.Failure;
 public class PortfolioMain {
 	/**
 	 * @param args
+	 * @throws IOException
 	 */
-	public static void main(String[] args) {
-		String a = args[0];
+	public static void main(String[] args) throws IOException {
 		PortFolioManager yahoo = new PortFolioManager();
-		yahoo.setFileName(a);
-		Result result = JUnitCore.runClasses(PortFolioManager.class);
-		for (Failure failure : result.getFailures()) {
-			System.out.println("The Test is Failed:" + failure.toString());
+		String filename = args[0];
+		String a = yahoo.checkFileDetails(filename);
+		if (a.equals("txt")) {
+			try {
+				boolean c = yahoo.checkFileIntegrity(filename);
+				if (c == true) {
+					yahoo.getPortfolioDetails(filename);
+				} else {
+					System.out.println("Empty File");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		System.out.println("The Test is Success:" + result.wasSuccessful());
 	}
+
 }
